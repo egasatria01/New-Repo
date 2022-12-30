@@ -4,7 +4,7 @@
 
 @section('content_header')
 <h1 class="m-0 text-dark">Form Pendaftaran</h1>
-@stop   
+@stop
 
 @section('content')
 <div class="container-fluid">
@@ -46,17 +46,12 @@
                     <label for="penulis">Alamat</label>
                     <textarea type="text" class="form-control" name="description" value="{{}}"></textarea>
                 </div>
-                <div class="row">
-                    <div class="col-3">
-                        <div class="form-group">
-                        <label for="tahun">Daftar Pasien</label>
-                            <select name="province" class="form-control">
-                            <option value="">Pilih Jenis Kelamin....</option>
-                            <option value="">Laki - Laki</option>
-                            <option value="">Perempuan</option>
-                            </select>
-                        </div> 
-                    </div>
+                <div class="form-group">
+                    <label for="kode_kamar">Jenis Kelamin</label>
+                    <select name="province" class="form-control" name="kode_kamar" id="kode_kaamar">
+                        <option value="laki-laki">Laki-Laki</option>
+                        <option value="perempuan">Perempuan</option>
+                    </select>
                 </div>
             <div class="modal-footer">
                     <div class="mr-auto">
