@@ -5,7 +5,7 @@
 @section('content_header')
 <div class="container-fluid">
 </div>
-@stop   
+@stop
 
 @section('content')
 <div class="container-fluid">
@@ -21,7 +21,7 @@
                     <label for="tahun"></label>
                             <select name="province" class="form-control">
                             <option value="">Sampai Saat Ini</option>
-                            <option value="">Per Tinggal</option>
+                            <option value="">Per Tanggal</option>
                             <option value="">Bulan</option>
                             <option value="">Tahun</option>
                             </select>
@@ -46,7 +46,7 @@
                     <label for="tahun"></label>
                             <select name="province" class="form-control">
                             <option value="">Sampai Saat Ini</option>
-                            <option value="">Per Tinggal</option>
+                            <option value="">Per Tanggal</option>
                             <option value="">Bulan</option>
                             <option value="">Tahun</option>
                             </select>
@@ -60,7 +60,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-4 border">
+        {{-- <div class="col-4 border">
             <div class="form-group">
                 <div class="bg-primary p-2 mb-3 text-center">
                     <label for="penulis">Laporan User</label>
@@ -76,7 +76,7 @@
                             <option value="">Tahun</option>
                             </select>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="col-6">
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-outline-primary w-100">Pilih</button>

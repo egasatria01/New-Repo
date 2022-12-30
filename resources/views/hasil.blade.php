@@ -3,8 +3,8 @@
 @section('title', 'Home Page')
 
 @section('content_header')
-<h1 class="m-0 text-dark">Form Pendaftaran</h1>
-@stop   
+<h1 class="m-0 text-dark">Hasil Periksa</h1>
+@stop
 
 @section('content')
 <div class="container-fluid">
@@ -25,18 +25,17 @@
                 <div class="col-12">
                     <div class="form-group">
                     <label for="penulis">Alamat</label>
-                    <textarea type="text" class="form-control" name="description" value="{{}}"></textarea>
+                    <textarea type="text" class="form-control" name="description" ></textarea>
                 </div>
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                        <label for="tahun">Ketentuan Rawat</label>
+                        <label for="tahun">Keterangan</label>
                             <select name="province" class="form-control">
-                            <option value="">Pilih Jenis Ketentuan....</option>
-                            <option value="">Dirawat</option>
-                            <option value="">Tidak Dirawat</option>
+                            <option value="">Rawat Inap</option>
+                            <option value="">Pulang</option>
                             </select>
-                        </div> 
+                        </div>
                     </div>
                     <div class="col-6">
                     <div class="form-group">

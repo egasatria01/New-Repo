@@ -1,8 +1,17 @@
 <?php
 
-use App\Http\Controllers\SpesialisController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\PasienController;
+use App\Http\Controllers\SpesialisController;
+use App\Http\Controllers\KamarController;
+use App\Http\Controllers\DokterController;
+use App\Http\Controllers\PendaftaranController;
+use App\Http\Controllers\HasilController;
+use App\Http\Controllers\RawatController;
+use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\LaporanController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -27,41 +36,31 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('admin/home', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.home')->middleware('is_admin');
 
-Route::get('admin/pasien', [App\Http\Controllers\AdminController::class, 'pasien'])->name('admin.pasien')->middleware('is_admin');
+// Pasien
+Route::resource('pasien', PasienController::class)->middleware('auth');
 
-Route::get('admin/pasien', function (){
-    return view ('pasien');
-})->name('home')->middleware('auth');
-
-
+// Spesialis
 Route::resource('spesialis', SpesialisController::class)->middleware('auth');
+Route::get('spesialis/delete/{id}', [SpesialisController::class, 'delete'])->middleware('auth');
 
+// Kamar
 Route::resource('kamar', KamarController::class)->middleware('auth');
+Route::get('kamar/delete/{id}', [KamarController::class, 'delete'])->middleware('auth');
 
-Route::get('/home/kamar', function (){
-    return view ('kamar');
-})->name('home')->middleware('auth');
+// Dokter
+Route::resource('dokter', DokterController::class)->middleware('auth');
 
-Route::get('/home/dokter', function (){
-    return view ('dokter');
-})->name('home')->middleware('auth');
+// Pendaftaran
+Route::resource('pendaftaran', PendaftaranController::class)->middleware('auth');
 
-Route::get('/home/pendaftaran', function (){
-    return view ('pendaftaran');
-})->name('home')->middleware('auth');
+// Hasil
+Route::resource('hasil', HasilController::class)->middleware('auth');
 
-Route::get('/home/periksa', function (){
-    return view ('periksa');
-})->name('home')->middleware('auth');
+// Rawat
+Route::resource('rawat', RawatController::class)->middleware('auth');
 
-Route::get('/home/rawat', function (){
-    return view ('rawat');
-})->name('home')->middleware('auth');
+// Pembayaran
+Route::resource('pembayaran', PembayaranController::class)->middleware('auth');
 
-Route::get('/home/pembayaran', function (){
-    return view ('pembayaran');
-})->name('home')->middleware('auth');
-
-Route::get('/home/laporan', function (){
-    return view ('laporan');
-})->name('home')->middleware('auth');
+// Laporan
+Route::resource('laporan', LaporanController::class)->middleware('auth');

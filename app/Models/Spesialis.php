@@ -10,6 +10,10 @@ class Spesialis extends Model
     public $timestamps = false;
     use HasFactory;
 
+    protected $table = 'spesialis';
+    protected $primaryKey = 'id_spesialis';
+
+
     protected $fillable = [
         'nama_spesialis', 'tanggal'
     ];
