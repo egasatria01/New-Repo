@@ -50,9 +50,9 @@
                                                     <label for="kelas_kamar">Kelas Kamar</label>
                                                     <select class="form-control" name="kelas_kamar" id="kelas_kamar">
                                                         <option value="">== Pilih Kelas ==</option>
-                                                        <option value="kelas I">Kelas I</option>
-                                                        <option value="kelas II">Kelas II</option>
-                                                        <option value="kelas III">Kelas III</option>
+                                                        <option value="kelas_I">Kelas I</option>
+                                                        <option value="kelas_II">Kelas II</option>
+                                                        <option value="kelas_III">Kelas III</option>
                                                         <option value="VIP">VIP</option>
                                                     </select>
                                                 </div>
@@ -67,21 +67,21 @@
                                                     <input type="date" class="form-control" name="tanggal" id="tanggal"
                                                         required />
                                                 </div>
-                                            </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
                                                     data-dismiss="modal">Tutup</button>
                                                 <button type="submit" class="btn btn-primary" id="saveBtn"
                                                     value="create">Kirim</button>
                                             </div>
+                                        </div>
                                         </form>
                                     </div>
                                 </div>
                             </div>
+                        </div>
                     </thead>
                 </table>
-            </div>
-            <table id="table-data" class="table table-bordered">
+                <table id="table-data" class="table table-bordered">
                 <thead>
                     <tr class="text-center">
                         <th>NO</th>
@@ -100,7 +100,6 @@
                 @foreach ($kamar as $kamars)
                     <tr>
                         <td>{{ $no++ }}</td>
-                        <td>{{ $kamars->id_kamar }}</td>
                         <td>{{ $kamars->no_kamar }}</td>
                         <td>{{ $kamars->nama_kamar }}</td>
                         <td>{{ $kamars->kelas_kamar }}</td>
@@ -120,17 +119,15 @@
                                 </a>
                             </div>
                         </td>
+                    </tr>
                         <tbody>
                 @endforeach
-                <!-- <tr>
-
-
-                     </tr> -->
-                </tbody>
-            </table>
+                        </tbody>
+                </table>
+            </div>
         </div>
     </div>
-    </div>
+
     {{-- Edit Modal --}}
     <div class="modal fade" id="editKamarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -160,18 +157,18 @@
                                     <label for="edit-kelas_kamar">Kelas Kamar</label>
                                     <select name="kelas_kamar" class="form-control" id="edit-kelas_kamar" required >
                                         <option value="">== Pilih Kelas ==</option>
-                                        <option value="">Kelas I</option>
-                                        <option value="">Kelas II</option>
-                                        <option value="">Kelas III</option>
-                                        <option value="">VIP</option>
+                                        <option value="kelas_I">Kelas I</option>
+                                        <option value="kelas_II">Kelas II</option>
+                                        <option value="kelas_III">Kelas III</option>
+                                        <option value="VIP">VIP</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="edit-status_kamar">Status</label>
                                     <select name="status_kamar" class="form-control" id="edit-status_kamar" required >
                                         <option value="">== Pilih Status ==</option>
-                                        <option value="">Sudah Terisi</option>
-                                        <option value="">Kosong</option>
+                                        <option value="terisi">Sudah Terisi</option>
+                                        <option value="kosong">Kosong</option>
                                     </select>
                                     <label for="edit-tanggal">Tanggal </label>
                                     <input type="date" class="form-control" name="tanggal" id="edit-tanggal"
@@ -218,6 +215,7 @@
                     $('#saveBtn').html('Save Changes');
                 }
             });
+            location.reload();
         });
 
         function updateConfirmation(id) {

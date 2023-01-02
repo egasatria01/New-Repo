@@ -21,46 +21,47 @@
                 <table id="table-data" class="table table-bordered">
                     <thead>
                         {{-- TAMBAH DATA SPESIALIS --}}
-
                         <div class="modal fade" id="tambahBukuModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                             aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">Tambah Data Spesialis </h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
                                     </div>
                                     <div class="modal-body">
-                                    <form id="spesialisForm" name="spesialisForm" method="post" enctype="multipart/form-data">
-                                        <div class="modal-body">
-                                            @csrf
-                                            <div class="form-group">
-                                                <label for="nama_spesialis">Nama Spesialis</label>
-                                                <input type="text"class="form-control" name="nama_spesialis"
-                                                    id="nama_spesialis" required />
-                                                <label for="tanggal">Tanggal </label>
-                                                <input type="date" class="form-control" name="tanggal" id="tanggal" required />
+                                        <form id="spesialisForm" name="spesialisForm" method="post"
+                                            enctype="multipart/form-data">
+                                            <div class="modal-body">
+                                                @csrf
+                                                <div class="form-group">
+                                                    <label for="nama_spesialis">Nama Spesialis</label>
+                                                    <input type="text"class="form-control" name="nama_spesialis"
+                                                        id="nama_spesialis" required />
+                                                    <label for="tanggal">Tanggal </label>
+                                                    <input type="date" class="form-control" name="tanggal" id="tanggal"
+                                                        required />
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-dismiss="modal">Tutup</button>
-                                            <button type="submit" class="btn btn-primary" id="saveBtn" value="create">Kirim</button>
-                                        </div>
-                                    </form>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Tutup</button>
+                                                <button type="submit" class="btn btn-primary" id="saveBtn"
+                                                    value="create">Kirim</button>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                     </thead>
                 </table>
             </div>
             <table id="table-data" class="table table-bordered">
                 <thead>
                     <tr class="text-center">
-                        <th>NO</th>
-                        <th>Id Spesialis</th>
+                        <th>ID Spesialis</th>
                         <th>Nama Spesialis</th>
                         <th>Tanggal</th>
                         <th>Aksi</th>
@@ -73,29 +74,31 @@
                 @foreach ($spesialis as $spesialiss)
                     <tr>
                         <td>{{ $no++ }}</td>
-                        <td>{{ $spesialiss->id_spesialis }}</td>
                         <td>{{ $spesialiss->nama_spesialis }}</td>
                         <td>{{ $spesialiss->tanggal }}</td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <button type="button" id="btn-edit-spesialis" class="btn btn-success editSpesialis-{{ $spesialiss->id_spesialis }}" onclick="updateConfirmation('{{ $spesialiss->id_spesialis }}')"
-                                    data-toggle="modal" data-target="#editSpesialisModal"
-                                    data-id={{ $spesialiss->id_spesialis }}
-                                    data-nama_spesialis={{ $spesialiss->nama_spesialis }}
+                                <button type="button" id="btn-edit-spesialis"
+                                    class="btn btn-success editSpesialis-{{ $spesialiss->id_spesialis }}"
+                                    onclick="updateConfirmation('{{ $spesialiss->id_spesialis }}')" data-toggle="modal"
+                                    data-target="#editSpesialisModal" data-nama_spesialis={{ $spesialiss->nama_spesialis }}
                                     data-tanggal={{ $spesialiss->tanggal }}>
                                     Edit
                                 </button>
-                                <a type="button" id="btn-hapus-spesialis" class="btn btn-danger hapusSpesialis-{{ $spesialiss->id_spesialis }}"  onclick="return confirm('Are you sure?')" href="{{url('spesialis/delete/'.$spesialiss->id_spesialis)}}">
+                                <a type="button" id="btn-hapus-spesialis"
+                                    class="btn btn-danger hapusSpesialis-{{ $spesialiss->id_spesialis }}"
+                                    onclick="return confirm('Are you sure?')"
+                                    href="{{ url('spesialis/delete/' . $spesialiss->id_spesialis) }}">
                                     Hapus
                                 </a>
                             </div>
                         </td>
-                    <tbody>
+                        <tbody>
                 @endforeach
                 <!-- <tr>
 
 
-                 </tr> -->
+                     </tr> -->
                 </tbody>
             </table>
         </div>
@@ -120,9 +123,11 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="edit-nama-spesialis">Nama Spesialis</label>
-                                    <input type="text" class="form-control" name="nama_spesialis" id="edit-nama_spesialis" required />
+                                    <input type="text" class="form-control" name="nama_spesialis"
+                                        id="edit-nama_spesialis" required />
                                     <label for="edit-tanggal">Tanggal </label>
-                                    <input type="date" class="form-control" name="tanggal" id="tanggal-spesialis" required />
+                                    <input type="date" class="form-control" name="tanggal" id="tanggal-spesialis"
+                                        required />
                                 </div>
                             </div>
                         </div>
@@ -140,41 +145,37 @@
 @endsection
 
 @push('js')
+    <script>
+        //create
+        $(function() {})
 
-<script>
+        $('#saveBtn').click(function(e) {
+            e.preventDefault();
+            $(this).html('Sending..');
 
-     //create
-    $(function(){
-    })
-
-    $('#saveBtn').click(function(e) {
-        e.preventDefault();
-        $(this).html('Sending..');
-
-        $.ajax({
-            data: $('#spesialisForm').serialize(),
-            url: "{{ route('spesialis.store') }}",
-            type: "POST",
-            dataType: 'json',
-            success: function(data) {
-                $('#spesialisForm').trigger("reset");
-                $('#tambahBukuModal').modal('hide');
-                table.draw();
-            },
-            error: function(data) {
-                console.log('Error:', data);
-                $('#saveBtn').html('Save Changes');
-            }
+            $.ajax({
+                data: $('#spesialisForm').serialize(),
+                url: "{{ route('spesialis.store') }}",
+                type: "POST",
+                dataType: 'json',
+                success: function(data) {
+                    $('#spesialisForm').trigger("reset");
+                    $('#tambahBukuModal').modal('hide');
+                    table.draw();
+                },
+                error: function(data) {
+                    console.log('Error:', data);
+                    $('#saveBtn').html('Save Changes');
+                }
+            });
+            location.reload();
         });
-    });
 
-    //update
-    function updateConfirmation(id) {
-        $("#edit-nama_spesialis").val( $(".editSpesialis-"+id).attr("data-nama_spesialis"))
-        $("#tanggal-spesialis").val( $(".editSpesialis-"+id).attr("data-tanggal"))
-        $("#editForm").attr("action","{{ url('spesialis/') }}/"+id)
-    }
-
-</script>
-
+        //update
+        function updateConfirmation(id) {
+            $("#edit-nama_spesialis").val($(".editSpesialis-" + id).attr("data-nama_spesialis"))
+            $("#tanggal-spesialis").val($(".editSpesialis-" + id).attr("data-tanggal"))
+            $("#editForm").attr("action", "{{ url('spesialis/') }}/" + id)
+        }
+    </script>
 @endpush

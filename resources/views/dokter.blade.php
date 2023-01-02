@@ -58,8 +58,8 @@
                                                 <label for="jk">Jenis Kelamin</label>
                                                 <select class="form-control" name="jk" id="jk">
                                                     <option value="">Pilih Jenis Kelamin....</option>
-                                                    <option value="">Laki - Laki</option>
-                                                    <option value="">Perempuan</option>
+                                                    <option value="laki-laki">Laki - Laki</option>
+                                                    <option value="perempuan">Perempuan</option>
                                                 </select>
                                                 <label for="edit-tanggal">Tanggal </label>
                                                 <input type="date" class="form-control" name="tanggal" id="edit-tanggal"
@@ -102,7 +102,7 @@
                             <td>{{ $dokters->nama_dokter }}</td>
                             <td>{{ $dokters->id_spesialis }}</td>
                             <td>{{ $dokters->jam_praktek }}</td>
-                            <td>{{ $dokters->jenis_kelamin }}</td>
+                            <td>{{ $dokters->jenis_kelamin_d }}</td>
                             <td>{{ $dokters->tanggal }}</td>
                             <td>
                                 <div class="btn-group" role="group" aria-label="Basic example">
@@ -110,17 +110,17 @@
                                         class="btn btn-success editDokter-{{ $dokters->id_dokter }}"
                                         onclick="updateConfirmation('{{ $dokters->id_dokter }}')" data-toggle="modal"
                                         data-target="#editDokterModal" data-id={{ $dokters->id_dokter }}
-                                        data-nama_dokter={{ $kamars->nama_dokter }}
-                                        data-id_spesialis={{ $kamars->id_spesialis }}
-                                        data-jam_praktek={{ $kamars->jam_praktek }}
-                                        data-jenis_kelamin={{ $kamars->jenis_kelamin }}
-                                        data-tanggal={{ $kamars->tanggal }}>
+                                        data-nama_dokter={{ $dokters->nama_dokter }}
+                                        data-id_spesialis={{ $dokters->id_spesialis }}
+                                        data-jam_praktek={{ $dokters->jam_praktek }}
+                                        data-jenis_kelamin_d={{ $dokters->jenis_kelamin_d }}
+                                        data-tanggal={{ $dokters->tanggal }}>
                                         Edit
                                     </button>
                                     <a type="button" id="btn-hapus-kamar"
-                                        class="btn btn-danger hapusKamar-{{ $kamars->id_kamar }}"
+                                        class="btn btn-danger hapusKamar-{{ $dokters->id_dokter }}"
                                         onclick="return confirm('Apakah Kamu yakin?')"
-                                        href="{{ url('kamar/delete/' . $kamars->id_kamar) }}">
+                                        href="{{ url('dokter/delete/' . $dokters->id_dokter) }}">
                                         Hapus
                                     </a>
                                 </div>
@@ -183,8 +183,9 @@
                             <input type="hidden" name="old_cover" id="edit-old-cover" />
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                             <button type="submit" class="btn btn-success">Update</button>
-                </div>
-            </form>
+                         </div>
+                     @endforeach
+                </form>
             </div>
         </div>
     </div>

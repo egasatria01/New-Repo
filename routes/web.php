@@ -6,7 +6,6 @@ use App\Http\Controllers\PasienController;
 use App\Http\Controllers\SpesialisController;
 use App\Http\Controllers\KamarController;
 use App\Http\Controllers\DokterController;
-use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\HasilController;
 use App\Http\Controllers\RawatController;
 use App\Http\Controllers\PembayaranController;
@@ -45,13 +44,10 @@ Route::get('spesialis/delete/{id}', [SpesialisController::class, 'delete'])->mid
 
 // Kamar
 Route::resource('kamar', KamarController::class)->middleware('auth');
-Route::get('kamar/delete/{id}', [KamarController::class, 'delete'])->middleware('auth');
+Route::get('kamar/delete/{no}', [KamarController::class, 'delete'])->middleware('auth');
 
 // Dokter
 Route::resource('dokter', DokterController::class)->middleware('auth');
-
-// Pendaftaran
-Route::resource('pendaftaran', PendaftaranController::class)->middleware('auth');
 
 // Hasil
 Route::resource('hasil', HasilController::class)->middleware('auth');

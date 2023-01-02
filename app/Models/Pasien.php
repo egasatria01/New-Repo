@@ -7,18 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pasien extends Model
 {
-<<<<<<< HEAD
-    use HasFactory;
-=======
     public $timestamps = false;
     use HasFactory;
 
     protected $table = 'pasien';
-    protected $primaryKey = 'id_spesialis';
+    protected $primaryKey = 'id_pasien';
 
 
     protected $fillable = [
-        'nama_spesialis', 'tanggal'
+        'nama_pasien', 'umur_pasien','tgl_pasien','alamat_pasien','no_tlp','jenis_kelamin_p','tanggal'
     ];
->>>>>>> accd5543354f3370d83f4e019ebb4c45592ace61
 }

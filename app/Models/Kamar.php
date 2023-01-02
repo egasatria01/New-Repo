@@ -11,10 +11,10 @@ class Kamar extends Model
     use HasFactory;
     protected $table = 'kamar';
 
-    protected $primaryKey = 'id_kamar';
+    protected $primaryKey = 'no_kamar';
 
 
     protected $fillable = [
-        'no_kamar', 'nama_kamar', 'kelas_kamar', 'status_kamar', 'tanggal'
+         'nama_kamar', 'kelas_kamar', 'status_kamar', 'tanggal'
     ];
 }

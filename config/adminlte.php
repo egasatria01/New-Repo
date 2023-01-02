@@ -331,12 +331,6 @@ return [
 
         ['header' => 'DATA TRANSAKSI', 'can' => 'isUser',],
         [
-            'text' => 'Pendaftaran',
-            'url'  => 'pendaftaran',
-            'icon' => 'fas fa-fw fa-address-card',
-            'can' => 'isUser',
-        ],
-        [
             'text' => 'Hasil Periksa',
             'url'  => 'hasil',
             'icon' => 'fas fa-fw fa-clipboard-check',

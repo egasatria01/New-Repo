@@ -24,7 +24,7 @@ class DokterController extends Controller
             'tanggal' => 'required',
         ]);
 
-        Kamar::Create([
+        Dokter::Create([
             'nama_dokter' => $request->nama_dokter,
             'id_spesialis' => $request->id_spesialis,
             'jam_praktek' => $request->jam_praktek,
