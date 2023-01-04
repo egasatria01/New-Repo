@@ -6,21 +6,24 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\Dokter;
+use App\Models\Spesialis;
 class DokterController extends Controller
 {
     public function index()
     {
         $user = Auth::user();
         $dokter = Dokter::all();
-        return view('dokter', compact('user', 'dokter'));
+        $spesialis = Spesialis::all();
+        return view('dokter', compact('user', 'dokter','spesialis'));
     }
 
     public function store(Request $request){
+
         $validate = $request->all([
             'nama_dokter' => 'required|max:20',
             'id_spesialis' => 'required|max:255',
             'jam_praktek' => 'required',
-            'jenis_kelamin' => 'required',
+            'jenis_kelamin_d' => 'required',
             'tanggal' => 'required',
         ]);
 
@@ -28,7 +31,7 @@ class DokterController extends Controller
             'nama_dokter' => $request->nama_dokter,
             'id_spesialis' => $request->id_spesialis,
             'jam_praktek' => $request->jam_praktek,
-            'jenis_kelamin' => $request->jenis_kelamin,
+            'jenis_kelamin_d' => $request->jenis_kelamin_d,
             'tanggal' => $request->tanggal
         ]);
 
@@ -40,41 +43,39 @@ class DokterController extends Controller
     }
 
     public function update(Request $req, $id){
-            $kamar = Kamar::where("id_kamar","=",$id)->first();
+            $dokter = Dokter::where("id_dokter","=",$id)->first();
 
             $validate = $req->validate([
-            'no_kamar' => 'required|max:20',
-            'nama_kamar' => 'required|max:255',
-            'kelas_kamar' => 'required',
-            'status_kamar' => 'required',
-            'tanggal' => 'required',
+                'nama_dokter' => 'required|max:20',
+                'jam_praktek' => 'required',
+                'jenis_kelamin_d' => 'required',
+                'tanggal' => 'required',
             ]);
 
-            $kamar->no_kamar = $req->get('no_kamar');
-            $kamar->nama_kamar = $req->get('nama_kamar');
-            $kamar->kelas_kamar = $req->get('kelas_kamar');
-            $kamar->status_kamar = $req->get('status_kamar');
-            $kamar->tanggal = $req->get('tanggal');
+            $dokter->nama_dokter = $req->get('nama_dokter');
+            $dokter->jam_prakter = $req->get('jam_prakter');
+            $dokter->jenis_kelamin_d = $req->get('jenis_kelamin_d');
+            $dokter->tanggal = $req->get('tanggal');
 
-            $kamar->save();
+            $dokter->save();
 
         $notification = array(
-            'message' => 'Data Kamar berhasil diubah',
+            'message' => 'Data Dokter berhasil diubah',
             'alert-type' => 'success'
         );
 
-        return redirect('kamar')->with($notification);
+        return redirect('Dokter')->with($notification);
     }
 
     public function delete($id){
 
-        $kamar = Kamar::where("id_kamar","=",$id)->delete();
+        $kamar = Dokter::where("id_dokter","=",$id)->delete();
 
         $notification = array(
-            'message' => 'Data Kamar berhasil dihapus',
+            'message' => 'Data Dokter berhasil dihapus',
             'alert-type' => 'success'
         );
 
-        return redirect('kamar')->with($notification);
+        return redirect('dokter')->with($notification);
         }
 }
