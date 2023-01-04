@@ -27,7 +27,7 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Tambah Data Kamar</5>
+                                        <h5 class="modal-title" id="exampleModalLabel">Tambah Data Kamar</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
@@ -67,13 +67,13 @@
                                                     <input type="date" class="form-control" name="tanggal" id="tanggal"
                                                         required />
                                                 </div>
+                                            </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
                                                     data-dismiss="modal">Tutup</button>
                                                 <button type="submit" class="btn btn-primary" id="saveBtn"
                                                     value="create">Kirim</button>
                                             </div>
-                                        </div>
                                         </form>
                                     </div>
                                 </div>
@@ -81,6 +81,7 @@
                         </div>
                     </thead>
                 </table>
+            </div>
                 <table id="table-data" class="table table-bordered">
                 <thead>
                     <tr class="text-center">
@@ -100,6 +101,7 @@
                 @foreach ($kamar as $kamars)
                     <tr>
                         <td>{{ $no++ }}</td>
+                        <td>{{ $kamars->id_kamar }}</td>
                         <td>{{ $kamars->no_kamar }}</td>
                         <td>{{ $kamars->nama_kamar }}</td>
                         <td>{{ $kamars->kelas_kamar }}</td>
@@ -219,12 +221,12 @@
         });
 
         function updateConfirmation(id) {
-        $("#edit-no_kamar").val( $(".editKamar-"+id).attr("data-no_kamar"))
-        $("#edit-nama_kamar").val( $(".editKamar-"+id).attr("data-nama_kamar"))
-        $("#edit-kelas_kamar").val( $(".editKamar-"+id).attr("data-kelas_kamar"))
-        $("#edit-status_kamar").val( $(".editKamar-"+id).attr("data-status_kamar"))
-        $("#edit-tanggal").val( $(".editKamar-"+id).attr("data-tanggal"))
-        $("#editForm").attr("action","{{ url('kamar/') }}/"+id)
+        $("#edit-no_kamar").val( $(".editKamar-" + id).attr("data-no_kamar"))
+        $("#edit-nama_kamar").val( $(".editKamar-" + id).attr("data-nama_kamar"))
+        $("#edit-kelas_kamar").val( $(".editKamar-" + id).attr("data-kelas_kamar"))
+        $("#edit-status_kamar").val( $(".editKamar-" + id).attr("data-status_kamar"))
+        $("#edit-tanggal").val( $(".editKamar-" + id).attr("data-tanggal"))
+        $("#editForm").attr("action","{{ url('kamar/') }}/" + id)
     }
     </script>
 @endpush
