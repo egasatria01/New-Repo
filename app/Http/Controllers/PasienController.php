@@ -53,6 +53,7 @@ class PasienController extends Controller
                 'alamat_pasien' => 'required',
                 'no_tlp' => 'required',
                 'jenis_kelamin_p' => 'required',
+                'tanggal' => 'required',
             ]);
 
             $pasien->nama_pasien = $req->get('nama_pasien');
@@ -61,6 +62,7 @@ class PasienController extends Controller
             $pasien->alamat_pasien = $req->get('alamat_pasien');
             $pasien->no_tlp = $req->get('no_tlp');
             $pasien->jenis_kelamin_p = $req->get('jenis_kelamin_p');
+            $pasien->tanggal = $req->get('tanggal');
 
             $kamar->save();
 
@@ -74,10 +76,10 @@ class PasienController extends Controller
 
     public function delete($id){
 
-        $kamar = Kamar::where("id_pasien","=",$id)->delete();
+        $pasien = Pasien::where("id_pasien","=",$id)->delete();
 
         $notification = array(
-            'message' => 'Data Kamar berhasil dihapus',
+            'message' => 'Data Pasien berhasil dihapus',
             'alert-type' => 'success'
         );
 

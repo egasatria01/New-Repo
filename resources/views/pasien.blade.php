@@ -70,7 +70,7 @@
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="tanggal">Tanggal lahir Pasien</label>
+                                                    <label for="tanggal">Tanggal</label>
                                                     <input type="date"class="form-control" name="tanggal" id="tanggal"
                                                         required />
                                                 </div>
@@ -94,7 +94,7 @@
                             <th>ID Pasien</th>
                             <th>Nama Pasien</th>
                             <th>Umur </th>
-                            <th>Tanggal Lahir </th>
+                            <th>Tanggal Lahir Pasien </th>
                             <th>Alamat</th>
                             <th>No Telp Pasien</th>
                             <th>Jenis Kelamin</th>
@@ -120,13 +120,20 @@
                                 <td>{{ $pasiens->tanggal }}</td>
                                 <td>
                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                        <button type="button" id="btn-edit-buku" class="btn btn-success" data-toggle="modal"
-                                            data-target="#editBukuModal">
-                                            Edit
-                                        </button>
-                                        <button type="button" class="btn btn-danger" onclick="deleteConfirmation('' )">
-                                            Hapus
-                                        </button>
+                                    <button type="button" id="btn-edit-pasien"
+                                    class="btn btn-success editPasien-{{ $pasiens->id_pasien }}"
+                                    onclick="updateConfirmation('{{ $pasiens->id_pasien }}')" data-toggle="modal"
+                                    data-target="#editPasienModal" data-nama_pasien={{ $pasiens->nama_pasien }}
+                                    data-umur_pasien={{ $pasiens->umur_pasien }} data-tgl_pasien={{ $pasiens->tgl_pasien }} data-alamat_pasien={{ $pasiens->alamat_pasien }}
+                                    data-no_tlp={{ $pasiens->no_tlp }} data-jenis_kelamin_p={{ $pasiens->jenis_kelamin_p }} data-tanggal={{ $pasiens->tanggal }}>
+                                    Edit
+                                </button>
+                                <a type="button" id="btn-hapus-pasien"
+                                    class="btn btn-danger hapusPasien-{{ $pasiens->id_pasien }}"
+                                    onclick="return confirm('Are you sure?')"
+                                    href="{{ url('pasien/delete/' . $pasiens->id_pasien) }}">
+                                    Hapus
+                                </a>
                                     </div>
                                 </td>
                             </tr>
@@ -136,7 +143,9 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="editBukuModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    {{-- EDIT MODAL --}}
+    <div class="modal fade" id="editPasienModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -152,36 +161,41 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="edit-judul">Nama</label>
-                                    <input type="text" class="form-control" id="edit-judul" name="judul"
+                                    <label for="edit-nama_pasien">Nama</label>
+                                    <input type="text" class="form-control" name="nama_pasien" id="edit-nama_pasien"
                                         required />
                                 </div>
                                 <div class="form-group">
-                                    <label for="edit-penulis">Umur</label>
-                                    <input type="text" class="form-control" name="penulis" id="edit-penulis"
+                                    <label for="edit-umur_pasien">Umur</label>
+                                    <input type="text" class="form-control" name="umur" id="edit-umur_pasien"
                                         required />
                                 </div>
                                 <div class="form-group">
-                                    <label for="edit-tahun">Tanggal Lahir</label>
-                                    <input type="date" class="form-control" name="tahun" id="edit-tahun"
+                                    <label for="edit-tgl_pasien">Tanggal Lahir</label>
+                                    <input type="date" class="form-control" name="tanggal" id="edit-tgl_pasien"
                                         required />
                                 </div>
                                 <div class="form-group">
-                                    <label for="penulis">Alamat</label>
-                                    <textarea type="text" class="form-control" name="description" value=""></textarea>
+                                    <label for="edit-alamat_pasien">Alamat</label>
+                                    <textarea type="text" class="form-control" name="description" id="edit-alamat_pasien" value=""></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label for="edit-tahun">No Telp Pasien</label>
-                                    <input type="text" class="form-control" name="tahun" id="edit-tahun"
+                                    <label for="edit-no_tlp">No Telp Pasien</label>
+                                    <input type="text" class="form-control" name="nomor" id="edit-no_tlp"
                                         required />
                                 </div>
                                 <div class="form-group">
-                                    <label for="tahun">Jenis Kelamin</label>
-                                    <select name="province" class="form-control">
+                                    <label for="edit-jenis_kelamin_p">Jenis Kelamin</label>
+                                    <select name="jenis_kelamin" id="edit-jenis_kelamin_p" class="form-control">
                                         <option value="">Pilih Jenis Kelamin....</option>
-                                        <option value="">Laki - Laki</option>
-                                        <option value="">Perempuan</option>
+                                        <option value="laki-laki">Laki - Laki</option>
+                                        <option value="perempuan">Perempuan</option>
                                     </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="edit-tanggal">Tanggal </label>
+                                    <input type="date" class="form-control" name="tanggal" id="edit-tanggal"
+                                        required />
                                 </div>
                             </div>
                         </div>
@@ -227,12 +241,14 @@
         });
 
         function updateConfirmation(id) {
-            $("#edit-no_kamar").val($(".editKamar-" + id).attr("data-no_kamar"))
-            $("#edit-nama_kamar").val($(".editKamar-" + id).attr("data-nama_kamar"))
-            $("#edit-kelas_kamar").val($(".editKamar-" + id).attr("data-kelas_kamar"))
-            $("#edit-status_kamar").val($(".editKamar-" + id).attr("data-status_kamar"))
-            $("#edit-tanggal").val($(".editKamar-" + id).attr("data-tanggal"))
-            $("#editForm").attr("action", "{{ url('kamar/') }}/" + id)
+            $("#edit-nama_pasien").val($(".editPasien-" + id).attr("data-nama_pasien"))
+            $("#edit-umur_pasien").val($(".editPasien-" + id).attr("data-umur_pasien"))
+            $("#edit-tgl_pasien").val($(".editPasien-" + id).attr("data-tgl_pasien"))
+            $("#edit-alamat_pasien").val($(".editPasien-" + id).attr("data-alamat_pasien"))
+            $("#edit-no_tlp").val($(".editPasien-" + id).attr("data-no_tlp"))
+            $("#edit-jenis_kelamin_p").val($(".editPasien-" + id).attr("data-jenis_kelamin_p"))
+            $("#edit-tanggal").val($(".editPasien-" + id).attr("data-tanggal"))
+            $("#editForm").attr("action", "{{ url('pasien/') }}/" + id)
         }
     </script>
 @endpush

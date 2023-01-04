@@ -37,6 +37,7 @@ Route::get('admin/home', [App\Http\Controllers\AdminController::class, 'index'])
 
 // Pasien
 Route::resource('pasien', PasienController::class)->middleware('auth');
+Route::get('pasien/delete/{id}', [PasienController::class, 'delete'])->middleware('auth');
 
 // Spesialis
 Route::resource('spesialis', SpesialisController::class)->middleware('auth');
