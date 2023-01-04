@@ -14,7 +14,7 @@ class CreateTableLaporan extends Migration
     public function up()
     {
         Schema::create('table_laporan', function (Blueprint $table) {
-            $table->id();
+            $table->id('id_laporan');
             $table->timestamps();
         });
     }
