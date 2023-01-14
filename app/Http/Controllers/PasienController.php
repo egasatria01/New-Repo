@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Pasien;
-
+use PDF;
 class PasienController extends Controller
 {
     public function index()
@@ -84,5 +84,14 @@ class PasienController extends Controller
         );
 
         return redirect('pasien')->with($notification);
+        }
+
+        public function print_pasiens()
+        {
+            $pasiens = Pasien::all();
+
+            $pdf = PDF::loadview('print_pasiens', ['pasien'=>$pasiens]);
+            return $pdf->download('data_pasien.pdf');
+            
         }
 }

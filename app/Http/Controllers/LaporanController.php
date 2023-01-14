@@ -11,7 +11,6 @@ class LaporanController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $laporan = Laporan::all();
-        return view('laporan', compact('user', 'laporan'));
+        return view('laporan', compact('user'));
     }
 }

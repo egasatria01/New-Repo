@@ -61,3 +61,4 @@ Route::resource('pembayaran', PembayaranController::class)->middleware('auth');
 
 // Laporan
 Route::resource('laporan', LaporanController::class)->middleware('auth');
+Route::get('admin/print_pasien', [PasienController::class, 'print_pasiens'])->name('admin.print.pasien')->middleware('is_admin');
