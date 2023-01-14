@@ -92,5 +92,6 @@ class PasienController extends Controller
 
             $pdf = PDF::loadview('print_pasiens', ['pasien'=>$pasiens]);
             return $pdf->download('data_pasien.pdf');
+            
         }
 }
