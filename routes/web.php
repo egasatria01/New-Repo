@@ -39,6 +39,7 @@ Route::get('admin/home', [App\Http\Controllers\AdminController::class, 'index'])
 Route::resource('pasien', PasienController::class)->middleware('auth');
 Route::get('pasien/delete/{id}', [PasienController::class, 'delete'])->middleware('auth');
 
+
 // Spesialis
 Route::resource('spesialis', SpesialisController::class)->middleware('auth');
 Route::get('spesialis/delete/{id}', [SpesialisController::class, 'delete'])->middleware('auth');
@@ -60,5 +61,9 @@ Route::resource('rawat', RawatController::class)->middleware('auth');
 Route::resource('pembayaran', PembayaranController::class)->middleware('auth');
 
 // Laporan
-Route::resource('laporan', LaporanController::class)->middleware('auth');
+Route::resource('laporan', LaporanController::class)->middleware('is_admin');
 Route::get('admin/print_pasien', [PasienController::class, 'print_pasiens'])->name('admin.print.pasien')->middleware('is_admin');
+
+//Export && Import Pasien
+Route::get('admin/pasien/export', [PasienController::class, 'export'])->name('admin.pasien.export')->middleware('is_admin');
+Route::post('admin/laporan/import', [PasienController::class, 'import'])->name('admin.laporan.import')->middleware('is_admin');

@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Pasien;
 use PDF;
+use App\Exports\PasienExport;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\PasiensImport;
+
 class PasienController extends Controller
 {
     public function index()
@@ -92,6 +96,22 @@ class PasienController extends Controller
 
             $pdf = PDF::loadview('print_pasiens', ['pasien'=>$pasiens]);
             return $pdf->download('data_pasien.pdf');
-            
+        }
+
+        public function export()
+        {
+            return Excel::download(new PasienExport, 'pasiens.xlsx');
+        }
+
+        public function import (Request $req)
+        {
+            Excel::import(new PasiensImport, $req->file('file'));
+
+            $notification = array (
+                'message'   => 'Import data berhasil dilakukan',
+                'alert-type'   => 'success',
+            );
+
+            return redirect()->route('admin.laporan.import')->with($notification);
         }
 }
